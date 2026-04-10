@@ -57,7 +57,7 @@ La API sarà disponibile su `http://localhost:3000`.
 
 Ogni richiesta richiede l'header `X-API-Key`:
 
-```
+``` 
 X-API-Key: dev-key-1234
 ```
 
@@ -80,7 +80,7 @@ Il seed inserisce automaticamente la chiave `dev-key-1234` al primo avvio. Senza
 
 ## Architettura
 
-```
+``` 
 src/
 ├── server.js          # Entry point: carica .env, avvia il server
 ├── app.js             # Express setup: middleware globali, mount routes
@@ -114,20 +114,20 @@ src/
 
 ### Pipeline middleware (in ordine)
 
-```
+``` 
 Request → express.json() → auth → rateLimiter → router → 404 → errorHandler
 ```
 
 ### Schema database
 
-```
+``` 
 publishers  (id, name, created_at, updated_at)
 authors     (id, first_name, last_name, birth_date, biography, nationality, created_at, updated_at)
-genres      (id, name UNIQUE)  ← pre-seeded, read-only
+genres      (id, name UNIQUE)  → pre-seeded, read-only
 books       (id, title, isbn UNIQUE, price, quantity, publication_year, description,
              publisher_id FK, author, category, created_at, updated_at)
-book_authors (book_id FK, author_id FK)  ← many-to-many
-book_genres  (book_id FK, genre_id FK)   ← many-to-many
+book_authors (book_id FK, author_id FK)  → many-to-many
+book_genres  (book_id FK, genre_id FK)   → many-to-many
 api_keys    (id, key UNIQUE, client_name, created_at)
 ```
 
@@ -197,6 +197,7 @@ Crea un nuovo libro.
 Lista paginata con filtri opzionali.
 
 **Query params:**
+
 | Param | Tipo | Default | Descrizione |
 |---|---|---|---|
 | `page` | integer | 1 | Pagina |
@@ -246,7 +247,6 @@ Aggiornamento parziale. Solo i campi inviati vengono modificati.
 | `first_name` | string | SI |
 | `last_name` | string | SI |
 | `birth_date` | string (YYYY-MM-DD) | NO |
-| `biography` | string | NO |
 | `nationality` | string | NO |
 
 **Risposte:** `201 Created` · `400 VALIDATION_ERROR`
