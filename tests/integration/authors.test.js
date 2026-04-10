@@ -66,6 +66,17 @@ describe('POST /api/v1/authors', () => {
     expect(res.body.error.code).toBe('VALIDATION_ERROR');
     expect(res.body.error.details.some(d => d.field === 'last_name')).toBe(true);
   });
+  
+  it('nationality mancante → 400 VALIDATION_ERROR', async () => {
+    const res = await request(app)
+      .post('/api/v1/authors')
+      .set(headers)
+      .send({ first_name: 'Italia' });
+
+    expect(res.status).toBe(400);
+    expect(res.body.error.code).toBe('VALIDATION_ERROR');
+    expect(res.body.error.details.some(d => d.field === 'last_name')).toBe(true);
+  });
 });
 
 // ---------------------------------------------------------------------------
