@@ -8,14 +8,13 @@ REST API per la gestione inventario di una libreria, costruita con Node.js ed Ex
 - **Framework:** Express 5
 - **Database:** SQLite (via better-sqlite3)
 - **Testing:** Jest + Supertest
-- **Dev tools:** npm / lint / test
+- **Dev tools:** npm run lint / test
 
 ## Setup
 
 ### Prerequisiti
 
 - Node.js >= 18
-- npm
 
 ### Installazione
 
@@ -23,39 +22,34 @@ REST API per la gestione inventario di una libreria, costruita con Node.js ed Ex
 npm install
 ```
 
-### Variabili d’ambiente
+## Variabili d'ambiente
 
-Crea un file `.env` nella root del progetto. Esempio:
+Crea un file `.env` nella root del progetto.
 
-```env
+Esempio:
+
+```bash
+env
 TEST_API_KEY=dev-key-1234
 ```
 
-> Per eseguire i test, assicurati che `TEST_API_KEY` sia impostato oppure usa il valore di fallback.
+> Per eseguire i test, assicurati di avere `TEST_API_KEY` impostato oppure usa il valore di default riportato.
 
-### Avvio
+## Avvio
 
 ```bash
 npm run dev
 ```
 
-L’API è disponibile tipicamente su `http://localhost:3000`.
+Output di esempio:
 
-## Architettura (overview)
+```bash
+✓ API listening on http://localhost:3000/api/v1/authors
+```
 
-La struttura del progetto prevede un livello server/route, un layer di validazione e servizi, e un livello di accesso al database (SQLite). Le tabelle principali sono:
+## Autenticazione
 
-- **authors**
-- **books**
-- **book_authors** (relazione many-to-many)
-
-## Documentazione API
-
-> Nota: questa repository include sia endpoint “books” sia endpoint “authors”.
-
-### Auth
-
-Gli endpoint richiedono header:
+Gli endpoint richiedono un header:
 
 - `X-API-Key: <API_KEY>`
 
@@ -66,9 +60,9 @@ curl -X GET http://localhost:3000/api/v1/authors \
   -H "X-API-Key: dev-key-1234"
 ```
 
-### Errors
+## Errori
 
-Risposte di errore strutturate del tipo:
+Risposta di errore strutturata nel body:
 
 ```json
 {
@@ -79,9 +73,9 @@ Risposte di errore strutturate del tipo:
 }
 ```
 
-## Authors
+## Autori
 
-### `POST /api/v1/authors`
+### POST /api/v1/authors
 
 Crea un nuovo autore.
 
@@ -96,7 +90,11 @@ Payload (esempio):
 }
 ```
 
-### `GET /api/v1/authors`
+#### Validazioni
+
+- `400 VALIDATION_ERROR` se mancano campi richiesti (es. `first_name`, `last_name`).
+
+### GET /api/v1/authors
 
 Lista autori paginata.
 
@@ -104,33 +102,29 @@ Query params:
 
 - `page` (default `1`)
 - `limit` (default `20`)
-- `search` (opzionale: ricerca per `first_name` / `last_name`)
+- `search` (opzionale; filtra per `first_name` / `last_name`)
 
-### `GET /api/v1/authors/:id`
+### GET /api/v1/authors/:id
 
-Recupera il dettaglio autore.
+Recupera il dettaglio di un autore.
 
-### `PATCH /api/v1/authors/:id`
+### PATCH /api/v1/authors/:id
 
-Aggiornamento parziale dell’autore.
+Aggiornamento parziale di un autore.
 
-### `DELETE /api/v1/authors/:id`
+### DELETE /api/v1/authors/:id
 
 Elimina un autore.
 
 - `204` se l’autore non ha libri
-- `409` se l’autore ha libri (`AUTHOR_HAS_BOOKS`)
+- `409 AUTHOR_HAS_BOOKS` se l’autore è collegato ad almeno un libro
 
 ## Testing
 
-### Esempi comandi
+### Esempio comandi
 
 ```bash
 npm test
 ```
 
-I test di integrazione usano **Jest** e **Supertest** e puliscono le tabelle tra i casi.
-
----
-
-> Questo README è stato aggiornato per migliorare chiarezza e usabilità della documentazione.
+> Nota: i file test usano header dei commenti per rendere più chiaro il routing e l’uso della key nelle richieste.
