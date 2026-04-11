@@ -83,7 +83,7 @@ Il seed inserisce automaticamente la chiave `dev-key-1234` al primo avvio. Senza
 ``` 
 src/
 ├── server.js           # Entry point: carica .env, avvia il server
-├── app.js              # Express setup: middleware globali, mount routes
+├── app.js              # Express setup: middleware globali, mount router
 ├── database.js         # Inizializzazione SQLite, schema, seed
 ├── controllers/        # Layer HTTP: validazione input, risposta JSON
 │   ├── books.js
@@ -126,8 +126,8 @@ authors     (id, first_name, last_name, birth_date, biography, nationality, crea
 genres      (id, name UNIQUE)  → pre-seeded, read-only
 books       (id, title, isbn UNIQUE, price, quantity, publication_year, description,
              publisher_id FK, author, category, created_at, updated_at)
-book_authors (book_id FK, author_id FK)  → many-to-many
-book_genres  (book_id FK, genre_id FK)   → many-to-many
+book_authors (book_id FK, author_id FK) → many-to-many
+book_genres  (book_id FK, genre_id FK)  → many-to-many
 api_keys    (id, key UNIQUE, client_name, created_at)
 ```
 
@@ -247,6 +247,7 @@ Aggiornamento parziale. Solo i campi inviati vengono modificati.
 | `first_name` | string | SI |
 | `last_name` | string | NO |
 | `birth_date` | string (YYYY-MM-DD) | NO |
+| `biography` | string | NO |
 | `nationality` | string | NO |
 
 **Risposte:** `201 Created` · `400 VALIDATION_ERROR`
