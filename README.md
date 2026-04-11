@@ -82,34 +82,34 @@ Il seed inserisce automaticamente la chiave `dev-key-1234` al primo avvio. Senza
 
 ``` 
 src/
-├── server.js          # Entry point: carica .env, avvia il server
-├── app.js             # Express setup: middleware globali, mount routes
-├── database.js        # Inizializzazione SQLite, schema, seed
-├── controllers/       # Layer HTTP: validazione input, risposta JSON
+├── server.js           # Entry point: carica .env, avvia il server
+├── app.js              # Express setup: middleware globali, mount routes
+├── database.js         # Inizializzazione SQLite, schema, seed
+├── controllers/        # Layer HTTP: validazione input, risposta JSON
 │   ├── books.js
 │   ├── authors.js
 │   ├── publishers.js
 │   └── genres.js
-├── repositories/      # Layer dati: query SQLite (solo logica DB)
+├── repositories/       # Layer dati: query SQLite (solo logica DB)
 │   ├── books.js
 │   ├── authors.js
 │   ├── publishers.js
 │   ├── genres.js
 │   └── apiKeys.js
-├── routes/            # Express Router per risorsa
+├── routes/             # Express Router per risorse
 │   ├── books.js
 │   ├── authors.js
 │   ├── publishers.js
 │   └── genres.js
-├── validators/        # Schemi Joi
+├── validators/         # Schemi Joi
 │   ├── books.js
 │   ├── authors.js
 │   ├── publishers.js
-│   └── common.js      # validateId, validatePagination
-└── middleware/
-    ├── auth.js        # X-API-Key validation
-    ├── rateLimiter.js # Fixed window, 100 req/min per key
-    └── errorHandler.js# Global error handler → { error: { code, message } }
+│   └── common.js       # validateId, validatePagination
+├── middleware/
+│   ├── auth.js         # X-API-Key validation
+│   ├── rateLimiter.js  # Fixed window, 100 req/min per key
+│   └── errorHandler.js # Global error handler → { error: { code, message } }
 ```
 
 ### Pipeline middleware (in ordine)
@@ -245,7 +245,7 @@ Aggiornamento parziale. Solo i campi inviati vengono modificati.
 | Campo | Tipo | Obbligatorio |
 |---|---|---|
 | `first_name` | string | SI |
-| `last_name` | string | SI |
+| `last_name` | string | NO |
 | `birth_date` | string (YYYY-MM-DD) | NO |
 | `nationality` | string | NO |
 
