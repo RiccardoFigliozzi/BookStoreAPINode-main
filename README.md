@@ -1,4 +1,4 @@
-# BookStore API
+## BookStore API
 
 REST API per la gestione inventario di una libreria, costruita con Node.js ed Express 5.
 
