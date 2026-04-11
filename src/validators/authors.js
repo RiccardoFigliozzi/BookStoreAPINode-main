@@ -6,6 +6,7 @@ const createAuthorSchema = Joi.object({
   first_name:  Joi.string().min(1).required(),
   last_name:   Joi.string().min(1).required(),
   birth_date:  Joi.string().pattern(/^\d{4}-\d{2}-\d{2}$/).allow(null, '').optional(),
+  biography:   Joi.string().allow(null, '').optional(),
   nationality: Joi.string().allow(null, '').optional()
 });
 
