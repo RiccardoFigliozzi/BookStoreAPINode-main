@@ -24,7 +24,7 @@ const createBookSchema = Joi.object({
     return value;
   }).required().messages({ 'any.invalid': 'isbn must be a valid ISBN-13 (13 digits, hyphens allowed)' }),
   author:   Joi.string().required(),
-  price:    Joi.number().greater(0).required(),
+  price:    Joi.number().greater(0).max(9999.99).required(),
   category: Joi.string().valid(...VALID_CATEGORIES).required(),
 });
 
