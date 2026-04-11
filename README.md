@@ -185,7 +185,7 @@ Crea un nuovo libro.
 | `title` | string | SI | max 200 caratteri |
 | `isbn` | string | SI | formato ISBN-13 (13 cifre, trattini ammessi) |
 | `author` | string | SI | |
-| `price` | number | SI | deve essere > 0 |
+| `price` | number | SI | deve essere > 0 e rispettare il limite massimo configurato dal validator |
 | `category` | string | SI | uno dei 11 generi validi |
 
 **Risposte:** `201 Created` · `400 VALIDATION_ERROR` · `409 DUPLICATE_ISBN` · `401 MISSING_API_KEY`
