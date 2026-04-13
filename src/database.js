@@ -28,7 +28,6 @@ db.exec(`
     first_name   TEXT    NOT NULL,
     last_name    TEXT    NOT NULL,
     birth_date   TEXT,
-    biography    TEXT,
     nationality  TEXT,
     created_at   TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
     updated_at   TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
