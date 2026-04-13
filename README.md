@@ -122,7 +122,7 @@ Request → express.json() → auth → rateLimiter → router → 404 → error
 
 ``` 
 publishers   (id, name, created_at, updated_at)
-authors      (id, first_name, last_name, birth_date, biography, nationality, created_at, updated_at)
+authors      (id, first_name, last_name, biography, nationality, created_at, updated_at)
 genres       (id, name UNIQUE)  → pre-seeded, read-only
 books        (id, title, isbn UNIQUE, price, quantity, publication_year, description,
               publisher_id FK, author, category, created_at, updated_at)
@@ -246,7 +246,6 @@ Aggiornamento parziale. Solo i campi inviati vengono modificati.
 |---|---|---|
 | `first_name` | string | SI |
 | `last_name` | string | NO |
-| `birth_date` | string (YYYY-MM-DD) | NO |
 | `biography` | string | NO |
 | `nationality` | string | NO |
 
