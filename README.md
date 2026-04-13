@@ -106,10 +106,10 @@ src/
 │   ├── authors.js
 │   ├── publishers.js
 │   └── common.js       # validateId, validatePagination
-├── middleware/
-│   ├── auth.js         # X-API-Key validation
-│   ├── rateLimiter.js  # Fixed window, 100 req/min per key
-│   └── errorHandler.js # Global error handler → { error: { code, message } }
+└── middleware/
+    ├── auth.js         # X-API-Key validation
+    ├── rateLimiter.js  # Fixed window, 100 req/min per key
+    └── errorHandler.js # Global error handler → { error: { code, message } }
 ```
 
 ### Pipeline middleware (in ordine)
@@ -121,14 +121,14 @@ Request → express.json() → auth → rateLimiter → router → 404 → error
 ### Schema database
 
 ``` 
-publishers  (id, name, created_at, updated_at)
-authors     (id, first_name, last_name, birth_date, biography, nationality, created_at, updated_at)
-genres      (id, name UNIQUE)  → pre-seeded, read-only
-books       (id, title, isbn UNIQUE, price, quantity, publication_year, description,
-             publisher_id FK, author, category, created_at, updated_at)
+publishers   (id, name, created_at, updated_at)
+authors      (id, first_name, last_name, birth_date, biography, nationality, created_at, updated_at)
+genres       (id, name UNIQUE)  → pre-seeded, read-only
+books        (id, title, isbn UNIQUE, price, quantity, publication_year, description,
+              publisher_id FK, author, category, created_at, updated_at)
 book_authors (book_id FK, author_id FK) → many-to-many
 book_genres  (book_id FK, genre_id FK)  → many-to-many
-api_keys    (id, key UNIQUE, client_name, created_at)
+api_keys     (id, key UNIQUE, client_name, created_at)
 ```
 
 ---
